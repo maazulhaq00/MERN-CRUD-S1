@@ -7,7 +7,16 @@ import StarIcon from "@heroicons/react/24/solid/StarIcon"
 import { SvgIcon } from '@mui/material';
 
 export const items = [
-    {
+  {
+    href: '/categories',
+    icon: (
+      <SvgIcon>
+        <ChartPieIcon />
+      </SvgIcon>
+    ),
+    label: 'Categories'
+  },    
+  {
     href: '/products',
     icon: (
       <SvgIcon>

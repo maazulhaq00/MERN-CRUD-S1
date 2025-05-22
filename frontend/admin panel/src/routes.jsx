@@ -1,13 +1,14 @@
 import { Outlet } from 'react-router-dom';
 import { Layout as DashboardLayout } from './layouts/dashboard/layout';
-import IconsPage from './pages/icons';
-import NotFoundPage from './pages/404';
-import OrdersPage from './pages/orders';
-import ReportsPage from './pages';
-import SettingsPage from './pages/settings';
-import ThemePage from './pages/theme';
+import IconsPage from './pages1/icons';
+import NotFoundPage from './pages1/404';
+import OrdersPage from './pages1/orders';
+import ReportsPage from './pages1';
+import SettingsPage from './pages1/settings';
+import ThemePage from './pages1/theme';
 import { element } from 'prop-types';
 import Products from './pages/products';
+import Categories from './pages/categories';
 
 export const routes = [
   {
@@ -21,6 +22,10 @@ export const routes = [
         index: true,
         element: <ReportsPage />
       },
+      {
+        path: 'categories',
+        element: <Categories />
+      },      
       {
         path: 'products',
         element: <Products />
