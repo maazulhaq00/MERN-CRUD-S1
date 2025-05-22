@@ -4,6 +4,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import connectToDb from './config/connectToDb.js';
 import productRouter from './routers/productRouter.js';
+import categoryRouter from './routers/categoryRouter.js';
 import cors from 'cors';
 
 dotenv.config()
@@ -17,6 +18,7 @@ app.use(cors());
 connectToDb();
 
 app.use('/products', productRouter)
+app.use('/categories', categoryRouter)
 
 // start app / server
 app.listen(process.env.PORT, ()=>{
