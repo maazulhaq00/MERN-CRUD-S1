@@ -9,6 +9,7 @@ import ThemePage from './pages1/theme';
 import { element } from 'prop-types';
 import Products from './pages/products';
 import Categories from './pages/categories';
+import EditCategory from './pages/editCategory';
 
 export const routes = [
   {
@@ -25,6 +26,10 @@ export const routes = [
       {
         path: 'categories',
         element: <Categories />
+      },
+      {
+        path: 'editcategory/:id',
+        element: <EditCategory />
       },      
       {
         path: 'products',

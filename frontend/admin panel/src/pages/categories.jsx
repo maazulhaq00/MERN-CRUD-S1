@@ -17,8 +17,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 import axios from 'axios';
+import { useNavigate, useNavigation } from 'react-router-dom';
 
 const Categories = () => {
+    const navigate = useNavigate()
     const [category, setCategory] = useState({
         categoryname: ""
     })
@@ -75,6 +77,10 @@ const Categories = () => {
         let response = await axios.delete(`http://localhost:3001/categories/${id}`)
 
         fetchData()
+    }
+
+    const handleCategoryEdit = async (id) => {
+        navigate(`/editcategory/${id}`)
     }
 
     return (
@@ -156,9 +162,10 @@ const Categories = () => {
                                                         <IconButton aria-label="delete" color='error' onClick={() => handleCategoryDelete(item._id)}>
                                                             <DeleteIcon />
                                                         </IconButton>
-                                                        <IconButton aria-label="delete" color='success'>
+                                                        <IconButton aria-label="delete" color='success' onClick={() => handleCategoryEdit(item._id)}>
                                                             <EditIcon />
-                                                        </IconButton>                                                    </TableCell>
+                                                        </IconButton>                                                    
+                                                    </TableCell>
                                                 </TableRow>
                                             ))}
                                         </TableBody>
