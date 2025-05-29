@@ -1,61 +1,59 @@
 import Product from '../modals/product.js'
 
 
-const createProduct = async (req, res)=>{
+const createProduct = async (req, res) => {
 
     // let pname = req.body.name;
     // let pprice = req.body.pprice;
     // let pdesc = req.body.pdesc;
 
-    let {pname, pprice, pdesc} = req.body;
+    let { name, description, price, image, category } = req.body;
 
     const product = await Product.create({
-        pname,
-        pprice,
-        pdesc
+        name, description, price, image, category
     })
 
-    res.json({product})
+    res.json({ product })
 }
 
-const fetchProducts = async (req, res)=> {
+const fetchProducts = async (req, res) => {
 
-    const products = await Product.find();
+    const products = await Product.find().populate("category");
 
-    res.json({products})
+    res.json({ products })
 }
 
-const fetchProductById = async (req, res)=> {
+const fetchProductById = async (req, res) => {
 
     const pid = req.params.pid;
 
-    const product = await Product.findById(pid);
+    const product = await Product.findById(pid).populate("category");
 
-    res.json({product})
+    res.json({ product })
 }
 
 const updateProduct = async (req, res) => {
 
     const pid = req.params.pid;
 
-    const {pname, pprice, pdesc} = req.body;
+    const { name, description, price, image, category } = req.body;
 
     await Product.findByIdAndUpdate(pid, {
-        pname, pprice, pdesc
+        name, description, price, image, category
     })
 
     const product = await Product.findById(pid);
 
-    res.json({ product})
+    res.json({ product })
 }
 
 const deleteProduct = async (req, res) => {
-    
+
     const pid = req.params.pid
 
     await Product.findByIdAndDelete(pid);
 
-    res.json({messgae: "Record deleted succcessfully"})
+    res.json({ messgae: "Record deleted succcessfully" })
 
 }
 

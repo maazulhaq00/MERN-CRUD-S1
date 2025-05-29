@@ -15,6 +15,15 @@ export const items = [
       </SvgIcon>
     ),
     label: 'Categories'
+  }, 
+  {
+    href: '/create-product',
+    icon: (
+      <SvgIcon>
+        <ChartPieIcon />
+      </SvgIcon>
+    ),
+    label: 'Create Product'
   },    
   {
     href: '/products',

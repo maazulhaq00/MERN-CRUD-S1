@@ -10,6 +10,7 @@ import { element } from 'prop-types';
 import Products from './pages/products';
 import Categories from './pages/categories';
 import EditCategory from './pages/editCategory';
+import AddProduct from './pages/addProduct';
 
 export const routes = [
   {
@@ -31,6 +32,10 @@ export const routes = [
         path: 'editcategory/:id',
         element: <EditCategory />
       },      
+      {
+        path: '/create-product',
+        element: <AddProduct />
+      },,      
       {
         path: 'products',
         element: <Products />

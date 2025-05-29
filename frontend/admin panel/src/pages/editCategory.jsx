@@ -12,18 +12,10 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const EditCategory = () => {
-
     const navigate = useNavigate();
-
     const { id } = useParams();
-
     const [category, setCategory] = useState({
         categoryname: ""
-    })
-
-    const [alert, setAlert] = useState({
-        message: "",
-        type: ""
     })
 
     let fetchData = async () => {
@@ -33,14 +25,12 @@ const EditCategory = () => {
             ...response.data.category
         })
     }
-
     useEffect(() => {
         fetchData();
     }, [])
 
     const handleCategoryChange = (e) => {
         let { name, value } = e.target;
-
         setCategory((preCat) => {
             return {
                 ...preCat,
@@ -50,9 +40,7 @@ const EditCategory = () => {
     }
     const handleCategorySubmit = async () => {
         let response = await axios.put(`http://localhost:3001/categories/${id}`, category)
-
         navigate('/categories');
-
     }
 
 
@@ -84,9 +72,6 @@ const EditCategory = () => {
 
                         </Stack>
                         <div>
-                            <Alert severity={alert.type}>{alert.message}</Alert>
-
-                            {/* Category Form */}
                             <Card sx={{ p: 3 }}>
 
                                 <Stack spacing={3}>
