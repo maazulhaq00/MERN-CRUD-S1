@@ -7,7 +7,9 @@ const createProduct = async (req, res) => {
     // let pprice = req.body.pprice;
     // let pdesc = req.body.pdesc;
 
-    let { name, description, price, image, category } = req.body;
+    let { name, description, price, category } = req.body;
+
+    let image = req.file.filename;
 
     const product = await Product.create({
         name, description, price, image, category
@@ -36,7 +38,9 @@ const updateProduct = async (req, res) => {
 
     const pid = req.params.pid;
 
-    const { name, description, price, image, category } = req.body;
+    let { name, description, price, category } = req.body;
+
+    let image = req.file.filename;
 
     await Product.findByIdAndUpdate(pid, {
         name, description, price, image, category

@@ -15,7 +15,7 @@ import axios from 'axios';
 const Products = () => {
 
     const [products, setProducts] = useState([]);
-    
+
     let fetchData = async () => {
         let response = await axios.get("http://localhost:3001/products");
         console.log(response);
@@ -65,9 +65,11 @@ const Products = () => {
                                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                                         <TableHead>
                                             <TableRow>
-                                                <TableCell align="center">Product Name</TableCell>
-                                                <TableCell align="center">Product Price</TableCell>
-                                                <TableCell align="center">Product Description</TableCell>
+                                                <TableCell align="center"></TableCell>
+                                                <TableCell align="center">Title</TableCell>
+                                                <TableCell align="center">Price</TableCell>
+                                                <TableCell align="center">Description</TableCell>
+                                                <TableCell align="center">Catgory</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
@@ -77,10 +79,14 @@ const Products = () => {
                                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                                 >
                                                     <TableCell component="th" scope="row">
-                                                        {product.pname}
+                                                        {product.image}
                                                     </TableCell>
-                                                    <TableCell align="center">{product.pprice}</TableCell>
-                                                    <TableCell align="left">{product.pdesc}</TableCell>
+                                                    <TableCell component="th" scope="row">
+                                                        {product.name}
+                                                    </TableCell>
+                                                    <TableCell align="center">{product.price}</TableCell>
+                                                    <TableCell align="left">{product.description}</TableCell>
+                                                    <TableCell align="left">{product.category.categoryname}</TableCell>
                                                 </TableRow>
                                             ))}
                                         </TableBody>

@@ -11,19 +11,67 @@ import axios from 'axios';
 import { useNavigate, useNavigation } from 'react-router-dom';
 
 const AddProduct = () => {
-
+    const navigate = useNavigate()
     const [categoryArr, setCategoryArr] = useState([]);
-
+    const [product, setProduct] = useState({
+        name: '',
+        description: '',
+        price: '',
+        image: '',
+        category: ''
+    })
+    const [alert, setAlert] = useState({
+        message: "",
+        type: ""
+    })
     const fetchCategories = async () => {
         let res = await axios.get("http://localhost:3001/categories")
 
         setCategoryArr(res.data.categories);
     }
-
-    useEffect(()=> {
+    useEffect(() => {
         fetchCategories()
     }, [])
+    const handleProductChange = (e) => {
+        let { name, value } = e.target;
+        setProduct((pre) => {
+            return {
+                ...pre,
+                [name]: value
+            }
+        })
+    }
 
+    const handleProductImageChange = (e) => {
+        setProduct((pre) => {
+            return {
+                ...pre,
+                image: e.target.files[0]
+            }
+        })
+    }
+    const handleProductSubmit = async () => {
+        try {
+
+            let formData = new FormData();
+
+            formData.append("name", product.name)
+            formData.append("description", product.description)
+            formData.append("price", product.price)
+            formData.append("image", product.image)
+            formData.append("category", product.category)
+
+
+            await axios.post("http://localhost:3001/products", formData)
+            navigate("/products")
+        }
+        catch (e) {
+            setAlert({
+                message: err.message,
+                type: "error"
+            })
+        }
+    }
 
     return (
         <>
@@ -63,27 +111,37 @@ const AddProduct = () => {
                                         fullWidth
                                         label="Product Name"
                                         name="name"
+                                        value={product.name}
+                                        onChange={handleProductChange}
                                     />
                                     <TextField
                                         fullWidth
                                         label="Product Description"
                                         name="description"
+                                        value={product.description}
+                                        onChange={handleProductChange}
                                     />
                                     <TextField
                                         fullWidth
                                         label="Product Price"
                                         name="price"
+                                        value={product.price}
+                                        onChange={handleProductChange}
                                     />
                                     <TextField
+                                        type='file'
                                         fullWidth
                                         label="Product Image"
                                         name="image"
+                                        onChange={handleProductImageChange}
                                     />
 
                                     <TextField
                                         fullWidth
                                         label="Select Category"
                                         name="category"
+                                        value={product.category}
+                                        onChange={handleProductChange}
                                         select
                                     >
                                         {categoryArr.map((category) => (
@@ -103,6 +161,7 @@ const AddProduct = () => {
                                             size="medium"
                                             type="submit"
                                             variant="contained"
+                                            onClick={handleProductSubmit}
                                         >
                                             Add Product
                                         </Button>
