@@ -6,6 +6,7 @@ import connectToDb from './config/connectToDb.js';
 import productRouter from './routers/productRouter.js';
 import categoryRouter from './routers/categoryRouter.js';
 import cors from 'cors';
+import authRouter from './routers/authRouter.js';
 
 dotenv.config()
 
@@ -14,9 +15,11 @@ dotenv.config()
 const app = express();
 app.use(express.json())
 app.use(cors());
+app.use(express.static('public'))
 
 connectToDb();
 
+app.use('/', authRouter)
 app.use('/products', productRouter)
 app.use('/categories', categoryRouter)
 

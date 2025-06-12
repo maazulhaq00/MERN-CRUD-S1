@@ -14,6 +14,8 @@ import axios from 'axios';
 
 const Products = () => {
 
+    const imageUrl = "http://localhost:3001/uploads/"
+
     const [products, setProducts] = useState([]);
 
     let fetchData = async () => {
@@ -79,7 +81,8 @@ const Products = () => {
                                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                                 >
                                                     <TableCell component="th" scope="row">
-                                                        {product.image}
+                                                        {/* {product.image} */}
+                                                        <img src={imageUrl + product.image} alt={product.description} width={200} />
                                                     </TableCell>
                                                     <TableCell component="th" scope="row">
                                                         {product.name}
