@@ -11,6 +11,7 @@ const signup = async (req, res) => {
         }
 
         let userDoc = new User({ name, email, password })
+        // let userDoc = new User({ name, email, password, role: "user" })
         userDoc.password = await bcrypt.hash(password, 3);
         await userDoc.save()
 
@@ -38,11 +39,11 @@ const login = async (req, res) => {
             return res.status(403).json({ message: "Incorrect Email or Password", success: false });
         }
 
+        // let payload = {"email": email,"_id": user._id, role: user.role}
         let payload = {"email": email,"_id": user._id}
-        let key = "secret"
         let options = {expiresIn: '24h'}
 
-        const token = jwt.sign(payload, key, options)
+        const token = jwt.sign(payload, process.env.SECRET_KEY, options)
 
         return res.status(200).json({ message: "Login Success", token, name: user.name, email });
     }

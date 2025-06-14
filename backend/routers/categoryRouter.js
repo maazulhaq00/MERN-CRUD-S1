@@ -1,12 +1,13 @@
 import express from 'express';
 import * as categoryController from '../controllers/categoryController.js'
+import ensureAuthenticated from '../middlewares/auth.js';
 
 const categoryRouter = express.Router();
 
-categoryRouter.post('/', categoryController.createCategory)
+categoryRouter.post('/', ensureAuthenticated, categoryController.createCategory)
 categoryRouter.get('/', categoryController.fetchCategories)
 categoryRouter.get('/:id', categoryController.fetchCategoryById)
-categoryRouter.put('/:id', categoryController.updateCategory)
-categoryRouter.delete('/:id', categoryController.deleteCategory)
+categoryRouter.put('/:id', ensureAuthenticated, categoryController.updateCategory)
+categoryRouter.delete('/:id', ensureAuthenticated, categoryController.deleteCategory)
 
 export default categoryRouter;
